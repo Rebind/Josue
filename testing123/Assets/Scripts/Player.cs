@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
 
     private bool facingRight;
 
+    [SerializeField]
+    private Transform[] groundPoints;
+
+    [SerializeField]
+    private float groundpoints;
+    private LayerMask whatIsGround;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -33,7 +40,7 @@ public class Player : MonoBehaviour
 	void FixedUpdate ()
     {
         float horizontal = Input.GetAxis("Horizontal");
-
+        
         HandleMovement(horizontal);
 
         Flip(horizontal);
@@ -45,15 +52,15 @@ public class Player : MonoBehaviour
 
     private void HandleMovement(float horizontal)
     {
-        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+       if (!myAnimator.GetBool("slide")&& !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
        {
             myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
         }
        else { 
-           myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
-        }
+          myRigidbody.velocity = new Vector2(horizontal * movementSpeed, myRigidbody.velocity.y);
+       }
 
-        if(slide && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
+       if(slide && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Slide"))
         {
             myAnimator.SetBool("slide", true);
         }
@@ -80,6 +87,10 @@ public class Player : MonoBehaviour
         {
             attack = true;
         }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            slide = true;
+        }
     }
 
     private void Flip(float horizontal)
@@ -100,5 +111,16 @@ public class Player : MonoBehaviour
     {
         attack = false;
         slide = false;
+    }
+
+    private bool IsGrounded()
+    {
+        if(myRigidbody.velocity.y <= 0)
+        {
+            foreach(Transform point in groundPoints)
+            {
+                Collider2D[] collider = Physics2D.OverlapCircleAll(point.position,)
+            }
+        }
     }
 }
