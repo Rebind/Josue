@@ -48,7 +48,7 @@ public class LegObject : MonoBehaviour
         oneLeg = false;
         twoLegs = false;
         legCount = 0;
-        player = GameObject.Find("ROLLINGHEAD_0").transform;
+        player = GameObject.Find("Player").transform;
         sprRend = GetComponent<SpriteRenderer>();
         goWithTag = new GameObject[100];
     }
@@ -187,7 +187,8 @@ public class LegObject : MonoBehaviour
             //change sprite to head with torso one arm and one leg
             //change movement/jump speed
             legCount = 2;
-            oneLeg = true;
+            oneLeg = false;
+            twoLegs = true;
             legObj.SetActive(false);
         }
         //Attach leg
@@ -197,6 +198,7 @@ public class LegObject : MonoBehaviour
             //change movement/jump speed
             legCount = 2;
             oneLeg = true;
+            twoLegs = true;
             legObj.SetActive(false);
         }
         else if (nearLeg && Input.GetKeyDown(KeyCode.X) && body.hasTorso && (legCount == 0) && arm.armCount == 1)
@@ -227,10 +229,21 @@ public class LegObject : MonoBehaviour
         {
             //Change sprite to head with torso with one leg
             //change movement or jump speed
+            oneLeg = true;
             twoLegs = false;
             CreateLegObj();
             legCount = 1;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && body.hasTorso && arm.armCount == 1 && legCount == 2)
+        {
+            //Change sprite to head with torso with one leg
+            //change movement or jump speed
+            oneLeg = true;
+            twoLegs = false;
+            CreateLegObj();
+            legCount = 1;
+        }
+
         else if (Input.GetKeyDown(KeyCode.Alpha3) && body.hasTorso && arm.armCount == 2 && legCount == 1)
         {
             //Change sprite to head with torso and two arms
@@ -260,7 +273,8 @@ public class LegObject : MonoBehaviour
         {
             //Change sprite to head with torso, 2 arms, 1 leg
             //change movement or jump speed
-            oneLeg = false;
+            twoLegs = false;
+            oneLeg = true;
             legCount = 1;
             CreateLegObj();
         }

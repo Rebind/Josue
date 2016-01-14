@@ -39,7 +39,7 @@ public class Arms : MonoBehaviour
         oneArm = false;
         leg = gameObject.GetComponent<LegObject>();
         body = gameObject.GetComponent<Torso>();
-        player = GameObject.Find("ROLLINGHEAD_0").transform;
+        player = GameObject.Find("Player").transform;
         sprRend = GetComponent<SpriteRenderer>();
         armCount = 0;
         goWithTag = new GameObject[100];
