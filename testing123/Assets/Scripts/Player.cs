@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
                     if(colliders[i].gameObject != gameObject)
                     {
                         myAnimator.ResetTrigger("jump");
-                        myAnimator.SetBool("land", false);
+                        myAnimator.SetBool("land", fal+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbavnmse);
                         return true;
                     }
                 }
